@@ -8,23 +8,22 @@ output:
   pdf_document: default
 ---
 
-```{r setWorkingDirectory, echo=FALSE}
-# sets local working directory
-setwd("~/Documents/Education/Coursera/2015/repdata-105/RepData_PeerAssessment1")
-```
+
 
 ## Loading and preprocessing the data
 
 First we will unzip the file and load the data into the object `data`:
 
-```{r loadingData}
+
+```r
 unzip("activity.zip")
 data <- read.csv("activity.csv")
 ```
 
 We tidy up the data by converting date strings into `Date` objects:
 
-```{r tidyData}
+
+```r
 data$date <- as.Date(data$date)
 ```
 
@@ -32,7 +31,8 @@ data$date <- as.Date(data$date)
 
 Aggregate the data by day and draw histogram of daily data:
 
-```{r totalByDay}
+
+```r
 totalByDay <- aggregate(steps ~ date, data, sum)
 
 library(ggplot2)
@@ -40,16 +40,28 @@ qplot(steps, data = totalByDay, geom = "histogram", binwidth = 2000) +
   ggtitle("Distribution of daily number of steps")
 ```
 
+![plot of chunk totalByDay](figure/totalByDay-1.png) 
+
 The **mean** daily number of steps is calculated:
 
-```{r}
+
+```r
 mean(totalByDay$steps)
+```
+
+```
+## [1] 10766.19
 ```
 
 The **median** daily number of steps is calculated:
 
-```{r}
+
+```r
 median(totalByDay$steps)
+```
+
+```
+## [1] 10765
 ```
 
 
@@ -57,18 +69,35 @@ median(totalByDay$steps)
 
 Average each interval across all days and plot time series plot:
 
-```{r avgByInterval}
+
+```r
 avgByInterval <- aggregate(steps ~ interval, data, mean)
 
 qplot(interval, steps, data = avgByInterval, geom = "line") +
   ggtitle("Average number of steps taken per 5-minute interval") #+
+```
+
+![plot of chunk avgByInterval](figure/avgByInterval-1.png) 
+
+```r
   scale_x_continuous(breaks = avgByInterval$interval)
+```
+
+```
+## continuous_scale(aesthetics = c("x", "xmin", "xmax", "xend", 
+##     "xintercept"), scale_name = "position_c", palette = identity, 
+##     breaks = ..1, expand = expand, guide = "none")
 ```
 
 Compute 5-minute interval with maximum number of steps:
 
-```{r intervalWithMaxSteps}
+
+```r
 avgByInterval$interval[avgByInterval$steps == max(avgByInterval$steps)]
+```
+
+```
+## [1] 835
 ```
 
 
