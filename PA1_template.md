@@ -1,12 +1,6 @@
----
-title: 'Reproducible Research: Peer Assessment 1'
-author: 'Nicolas Favaro'
-date: 'June 14, 2015'
-output:
-  html_document:
-    keep_md: yes
-  pdf_document: default
----
+# Reproducible Research: Peer Assessment 1
+Nicolas Favaro  
+June 14, 2015  
 
 
 
@@ -40,7 +34,7 @@ qplot(steps, data = totalByDay, geom = "histogram", binwidth = 2000) +
   ggtitle("Distribution of daily number of steps")
 ```
 
-![plot of chunk totalByDay](figure/totalByDay-1.png) 
+![](PA1_template_files/figure-html/totalByDay-1.png) 
 
 The **mean** daily number of steps is calculated:
 
@@ -77,7 +71,7 @@ qplot(interval, steps, data = avgByInterval, geom = "line") +
   ggtitle("Average number of steps taken per 5-minute interval") #+
 ```
 
-![plot of chunk avgByInterval](figure/avgByInterval-1.png) 
+![](PA1_template_files/figure-html/avgByInterval-1.png) 
 
 ```r
   scale_x_continuous(breaks = avgByInterval$interval)
